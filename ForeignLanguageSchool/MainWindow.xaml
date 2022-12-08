@@ -12,6 +12,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
+        <TextBlock Text="ЛЕАРН И ЛОГОТИП" VerticalAlignment="Center"></TextBlock>
         <Frame Name="frameWindow" Grid.Row="1" NavigationUIVisibility="Hidden">
             
         </Frame>

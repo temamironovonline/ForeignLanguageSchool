@@ -9,6 +9,21 @@
       Title="ServiceList">
 
     <Grid>
-        
+        <ListView Background="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <WrapPanel>
+                            <Image Name="imageService" Source="{Binding MainImagePath}"></Image>
+                            <StackPanel>
+                                <TextBlock Name="nameService" Text="{Binding Title}"></TextBlock>
+                                
+                            </StackPanel>
+                        </WrapPanel>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
