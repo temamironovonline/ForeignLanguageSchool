@@ -13,33 +13,36 @@
     </Page.Resources>
     
     <Grid>
-        <ListView Name="serviceList" Background="Transparent">
+        <ListView Name="serviceList" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <WrapPanel>
-                            <Image Name="imageService" Source="{Binding MainImagePath, FallbackValue={StaticResource defaultImage}, TargetNullValue={StaticResource defaultImage}}" Width="200"></Image>
-                            <StackPanel>
-                                <TextBlock Name="nameService" Text="{Binding Title}"></TextBlock>
-                                <WrapPanel>
-                                    
-                                    <TextBlock Uid="{Binding ID}" Name="oldPrice" Text="{Binding Cost}" TextDecorations="Strikethrough" Visibility="Collapsed" Loaded="oldPrice_Loaded"></TextBlock>
+                    <Border BorderBrush="#04a0ff" BorderThickness="1">
+                        <Grid Height="150">
+                            <WrapPanel VerticalAlignment="Bottom">
+                                <Image Name="imageService" Source="{Binding MainImagePath, FallbackValue={StaticResource defaultImage}, TargetNullValue={StaticResource defaultImage}}" Width="200"></Image>
+                                <StackPanel>
 
-                                    <TextBlock Name="whitespaceOldPrice" Text=" " Visibility="Collapsed" Loaded="oldPrice_Loaded"></TextBlock>
+                                    <TextBlock Name="nameService" Text="{Binding Title}"></TextBlock>
 
-                                    <TextBlock Name="price" Text="{Binding Cost, StringFormat=0 рублей за }"></TextBlock>
-                                    
-                                    <TextBlock Text=" "></TextBlock>
-                                    
-                                    <TextBlock Name="timeWork" Text="{Binding DurationInSeconds, StringFormat= 0 минут }"></TextBlock>
-                                </WrapPanel>
-                                <TextBlock Uid="{Binding ID}" Name="discount" Text="{Binding Discount, StringFormat=* скидка 0}" Visibility="Collapsed" Loaded="discount_Loaded"></TextBlock>
-                                <Button Uid="{Binding ID}" Name="updateButton" Content="Редактировать" Click="updateButton_Click"></Button>
-                                <Button Uid="{Binding ID}" Name="deleteButton" Content="Удалить" Click="deleteButton_Click"></Button>
-                            </StackPanel>
-                        </WrapPanel>
-                        
-                    </Grid>
+                                    <WrapPanel>
+                                        <TextBlock Uid="{Binding ID}" Name="oldPrice" Text="{Binding Cost}" Margin="0,0,5,0" TextDecorations="Strikethrough" Visibility="Collapsed" Loaded="oldPrice_Loaded"></TextBlock>
+                                        <TextBlock Uid="{Binding ID}" Name="informationService" Text="" Loaded="informationService_Loaded"></TextBlock>
+                                    </WrapPanel>
+
+                                    <TextBlock Uid="{Binding ID}" Name="discount" Text="{Binding Discount, StringFormat=* скидка 0}" Visibility="Collapsed" Loaded="discount_Loaded"></TextBlock>
+
+                                        
+
+                                </StackPanel>
+                            </WrapPanel>
+
+                            <WrapPanel VerticalAlignment="Bottom">
+                                <Button Uid="{Binding ID}" Name="updateButton" Content="Редактировать" Click="updateButton_Click"  Width="150" Height="20"></Button>
+                                <Button Uid="{Binding ID}" Name="deleteButton" Content="Удалить" Click="deleteButton_Click" Width="150" Height="20"></Button>
+                            </WrapPanel>
+
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

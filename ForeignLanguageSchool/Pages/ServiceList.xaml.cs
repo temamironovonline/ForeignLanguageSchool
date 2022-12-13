@@ -52,5 +52,16 @@ namespace ForeignLanguageSchool
         {
 
         }
+
+        private void informationService_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock informationText = (TextBlock)sender;
+
+            int indexService = Convert.ToInt32(informationText.Uid);
+            Service serviceItem = DataBaseConnection.schoolEntities.Service.FirstOrDefault(x => x.ID == indexService);
+            
+            informationText.Text = $"{serviceItem.Cost} рублей за {serviceItem.DurationInSeconds/60} минут";
+         
+        }
     }
 }
