@@ -70,6 +70,7 @@
     <Compile Include="ClientService.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\DataBaseConnection.cs" />
     <Compile Include="DocumentByService.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
@@ -107,7 +108,7 @@
     <Compile Include="Service.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ServiceList.xaml.cs">
+    <Compile Include="Pages\ServiceList.xaml.cs">
       <DependentUpon>ServiceList.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServicePhoto.cs">
@@ -131,7 +132,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ServiceList.xaml">
+    <Page Include="Pages\ServiceList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,6 +172,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\English.jpg" />
+    <Resource Include="Resources\for company.jpg" />
+    <Resource Include="Resources\online lessons.jpg" />
+    <Resource Include="Resources\Испанский язык.jpg" />
+    <Resource Include="Resources\Итальянский язык.jpg" />
+    <Resource Include="Resources\киноклуб.jpg" />
+    <Resource Include="Resources\Китайский язык.jpg" />
+    <Resource Include="Resources\Немецкий язык.png" />
+    <Resource Include="Resources\Подготовка к экзамену ACT.png" />
+    <Resource Include="Resources\Подготовка к экзамену GMAT.png" />
+    <Resource Include="Resources\Подготовка к экзамену GRE.jpeg" />
+    <Resource Include="Resources\Подготовка к экзамену IELTS.jpg" />
+    <Resource Include="Resources\Подготовка к экзамену SAT.png" />
+    <Resource Include="Resources\Подготовка к экзамену TOEFL.jpg" />
+    <Resource Include="Resources\Португальский язык.jpg" />
+    <Resource Include="Resources\Французский язык.jpg" />
+    <Resource Include="Resources\Японский язык.jpg" />
+    <Resource Include="Resources\defaultImage.png" />
     <Content Include="SchoolModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SchoolModel.Context.cs</LastGenOutput>
@@ -185,9 +204,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\" />
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

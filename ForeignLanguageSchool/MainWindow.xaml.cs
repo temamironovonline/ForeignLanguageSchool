@@ -23,7 +23,9 @@ namespace ForeignLanguageSchool
         public MainWindow()
         {
             InitializeComponent();
+            DataBaseConnection.schoolEntities = new SchoolEntities();
             FrameClass.forFrameWindow = frameWindow;
+            FrameClass.forFrameWindow.Navigate(new ServiceList());
         }
     }
 }

@@ -23,7 +23,7 @@ namespace ForeignLanguageSchool
     
         public int ID { get; set; }
         public string Title { get; set; }
-        public Nullable<decimal> Cost { get; set; }
+        public Nullable<int> Cost { get; set; }
         public int DurationInSeconds { get; set; }
         public string Description { get; set; }
         public Nullable<double> Discount { get; set; }
