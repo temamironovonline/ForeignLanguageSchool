@@ -75,11 +75,17 @@
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\Frame.cs" />
+    <Compile Include="ExitAdminModeWindow.xaml.cs">
+      <DependentUpon>ExitAdminModeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gender.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Manufacturer.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordAdminModeWindow.xaml.cs">
+      <DependentUpon>PasswordAdminModeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
@@ -120,6 +126,10 @@
     <Compile Include="Tag.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
+    <Page Include="ExitAdminModeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,6 +143,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\ServiceList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PasswordAdminModeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

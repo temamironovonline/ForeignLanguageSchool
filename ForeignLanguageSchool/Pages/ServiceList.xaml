@@ -18,10 +18,9 @@
                 <DataTemplate>
                     <Border BorderBrush="#04a0ff" BorderThickness="1">
                         <Grid Height="150">
-                            <WrapPanel VerticalAlignment="Bottom">
-                                <Image Name="imageService" Source="{Binding MainImagePath, FallbackValue={StaticResource defaultImage}, TargetNullValue={StaticResource defaultImage}}" Width="200"></Image>
-                                <StackPanel>
-
+                            <DockPanel>
+                                <Image DockPanel.Dock="Left" Name="imageService" Source="{Binding MainImagePath, FallbackValue={StaticResource defaultImage}, TargetNullValue={StaticResource defaultImage}}" Width="200"></Image>
+                                <StackPanel DockPanel.Dock="Top">
                                     <TextBlock Name="nameService" Text="{Binding Title}"></TextBlock>
 
                                     <WrapPanel>
@@ -30,16 +29,15 @@
                                     </WrapPanel>
 
                                     <TextBlock Uid="{Binding ID}" Name="discount" Text="{Binding Discount, StringFormat=* скидка 0}" Visibility="Collapsed" Loaded="discount_Loaded"></TextBlock>
-
-                                        
-
                                 </StackPanel>
-                            </WrapPanel>
+ 
+                                <WrapPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                                    <Button Uid="{Binding ID}" Name="updateButton" Content="Редактировать" Click="updateButton_Click"  Width="150" Height="20"></Button>
+                                    <Button Uid="{Binding ID}" Name="deleteButton" Content="Удалить" Click="deleteButton_Click" Width="150" Height="20"></Button>
+                                </WrapPanel>
+                            </DockPanel>
 
-                            <WrapPanel VerticalAlignment="Bottom">
-                                <Button Uid="{Binding ID}" Name="updateButton" Content="Редактировать" Click="updateButton_Click"  Width="150" Height="20"></Button>
-                                <Button Uid="{Binding ID}" Name="deleteButton" Content="Удалить" Click="deleteButton_Click" Width="150" Height="20"></Button>
-                            </WrapPanel>
+                            
 
                         </Grid>
                     </Border>
