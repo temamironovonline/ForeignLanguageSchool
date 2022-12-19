@@ -64,6 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windows\AddUpdateService.xaml.cs">
+      <DependentUpon>AddUpdateService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\BackgroundDiscountService.cs" />
     <Compile Include="Client.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
@@ -75,7 +79,7 @@
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\Frame.cs" />
-    <Compile Include="ExitAdminModeWindow.xaml.cs">
+    <Compile Include="Windows\ExitAdminModeWindow.xaml.cs">
       <DependentUpon>ExitAdminModeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gender.cs">
@@ -84,7 +88,7 @@
     <Compile Include="Manufacturer.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PasswordAdminModeWindow.xaml.cs">
+    <Compile Include="Windows\PasswordAdminModeWindow.xaml.cs">
       <DependentUpon>PasswordAdminModeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
@@ -126,7 +130,11 @@
     <Compile Include="Tag.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
-    <Page Include="ExitAdminModeWindow.xaml">
+    <Page Include="Windows\AddUpdateService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ExitAdminModeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,7 +154,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PasswordAdminModeWindow.xaml">
+    <Page Include="Windows\PasswordAdminModeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,6 +212,7 @@
     <Resource Include="Resources\Французский язык.jpg" />
     <Resource Include="Resources\Японский язык.jpg" />
     <Resource Include="Resources\defaultImage.png" />
+    <Resource Include="Resources\school_logo.ico" />
     <Content Include="SchoolModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SchoolModel.Context.cs</LastGenOutput>

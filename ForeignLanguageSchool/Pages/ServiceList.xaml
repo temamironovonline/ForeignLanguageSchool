@@ -13,10 +13,62 @@
     </Page.Resources>
     
     <Grid>
-        <ListView Name="serviceList" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <WrapPanel VerticalAlignment="Center">
+            <StackPanel Margin="0,0,5,0">
+                
+                <TextBlock Text="По цене:" Margin="0,0,0,10"></TextBlock>
+                <TextBlock Text="По размеру скидки:"></TextBlock>
+            
+            </StackPanel>
+
+            <StackPanel Margin="0,0,5,0">
+                
+                <ComboBox Name="priceSorting" Width="150" SelectionChanged="priceSorting_SelectionChanged" Margin="0,0,0,5">
+                    <ComboBoxItem Content="Не выбрано"></ComboBoxItem>
+                    <ComboBoxItem Content="По возрастанию"></ComboBoxItem>
+                    <ComboBoxItem Content="По убыванию"></ComboBoxItem>
+                </ComboBox>
+
+                <ComboBox Name="discountFiltrating" Width="150" SelectionChanged="discountFiltrating_SelectionChanged">
+                    <ComboBoxItem Content="Не выбрано"></ComboBoxItem>
+                    <ComboBoxItem Content="от 0 до 5%"></ComboBoxItem>
+                    <ComboBoxItem Content="от 5% до 15%"></ComboBoxItem>
+                    <ComboBoxItem Content="от 15% до 30%"></ComboBoxItem>
+                    <ComboBoxItem Content="от 30% до 70%"></ComboBoxItem>
+                    <ComboBoxItem Content="от 70% до 100%"></ComboBoxItem>
+                </ComboBox>
+                
+            </StackPanel>
+
+            <StackPanel>
+                
+                <TextBlock Text="Название услуги: " Margin="0,0,0,10"></TextBlock>
+                <TextBlock Text="Описание услуги: "></TextBlock>
+            
+            </StackPanel>
+
+            <StackPanel Margin="0,0,10,0">
+
+                <TextBox Name="nameService" Width="150" Height="20" Margin="0,0,0,5" TextChanged="nameService_TextChanged"></TextBox>
+                <TextBox Name="descriptionService" Width="150" Height="20" TextChanged="descriptionService_TextChanged"></TextBox>
+                
+            </StackPanel>
+
+            <Button Name="clearButton" Content="Очистить" Height="20" Width="100" Click="clearButton_Click"></Button>
+            
+        </WrapPanel>
+        
+        
+        <ListView Grid.Row="1" Name="serviceList" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="#04a0ff" BorderThickness="1">
+                    <Border BorderBrush="#04a0ff" BorderThickness="1" Background="{Binding GetBackgroundColorDiscountService}">
                         <Grid Height="150">
                             <DockPanel>
                                 <Image DockPanel.Dock="Left" Name="imageService" Source="{Binding MainImagePath, FallbackValue={StaticResource defaultImage}, TargetNullValue={StaticResource defaultImage}}" Width="200"></Image>
@@ -28,17 +80,14 @@
                                         <TextBlock Uid="{Binding ID}" Name="informationService" Text="" Loaded="informationService_Loaded"></TextBlock>
                                     </WrapPanel>
 
-                                    <TextBlock Uid="{Binding ID}" Name="discount" Text="{Binding Discount, StringFormat=* скидка 0}" Visibility="Collapsed" Loaded="discount_Loaded"></TextBlock>
+                                    <TextBlock Uid="{Binding ID}" Name="discount" Text="" Visibility="Collapsed" Loaded="discount_Loaded"></TextBlock>
                                 </StackPanel>
- 
+
                                 <WrapPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                                    <Button Uid="{Binding ID}" Name="updateButton" Content="Редактировать" Click="updateButton_Click"  Width="150" Height="20"></Button>
-                                    <Button Uid="{Binding ID}" Name="deleteButton" Content="Удалить" Click="deleteButton_Click" Width="150" Height="20"></Button>
+                                    <Button Uid="{Binding ID}" Name="updateButton" Content="Редактировать" Click="updateButton_Click"  Width="150" Height="20" Loaded="updateButton_Loaded"></Button>
+                                    <Button Uid="{Binding ID}" Name="deleteButton" Content="Удалить" Click="deleteButton_Click" Width="150" Height="20" Loaded="deleteButton_Loaded"></Button>
                                 </WrapPanel>
                             </DockPanel>
-
-                            
-
                         </Grid>
                     </Border>
                 </DataTemplate>

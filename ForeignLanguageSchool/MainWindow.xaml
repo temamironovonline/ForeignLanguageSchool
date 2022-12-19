@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForeignLanguageSchool"
         mc:Ignorable="d"
+        Icon="./Resources/school_logo.ico"
         Title="Леарн" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -15,7 +16,9 @@
         <TextBlock Text="ЛЕАРН И ЛОГОТИП" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left"></TextBlock>
         <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right">
             <Button Name="adminModeButton" Width="150" Height="20" Content="Режим администратора" Click="adminModeButton_Click"></Button>
+            <Button Name="addServiceButton" Width="200" Height="20" Content="Добавить услугу" Visibility="Collapsed" Click="addServiceButton_Click"></Button>
             <Button Name="exitAdminModeButton" Width="200" Height="20" Content="Выйти из режима администратора" Visibility="Collapsed" Click="exitAdminModeButton_Click"></Button>
+            
         </WrapPanel>
         
         <Frame Name="frameWindow" Grid.Row="1" NavigationUIVisibility="Hidden">
