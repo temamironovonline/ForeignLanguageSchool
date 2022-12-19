@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -18,9 +20,11 @@ namespace ForeignLanguageSchool
         public AddUpdateService()
         {
             InitializeComponent();
+            services = DataBaseConnection.schoolEntities.Service.ToList();
         }
 
         Service service;
+        List<Service> services;
 
         public AddUpdateService(Service service)
         {
@@ -41,26 +45,43 @@ namespace ForeignLanguageSchool
                             {
                                 if (Convert.ToInt32(discountService.Text) <= 100 && Convert.ToInt32(discountService.Text) >= 0)
                                 {
-                                    string pathPhoto = "\\Resources\\" + Path.GetFileName(Convert.ToString(imageService.Source));
-                                    MessageBox.Show(pathPhoto);
-                                    if (pathPhoto == "pack://application:,,,/Resources/defaultImage.png")
+                                    bool checkSame = false;
+                                    nameService.Text = nameService.Text.Trim();
+                                    foreach(Service serviceSearch in services)
                                     {
-                                        pathPhoto = null;
+                                        if (serviceSearch.Title == nameService.Text)
+                                        {
+                                            checkSame = true;
+                                        }
                                     }
-                                    service = new Service()
+                                    if (!checkSame)
                                     {
-                                        Title = nameService.Text,
-                                        Cost = Convert.ToInt32(priceService.Text),
-                                        DurationInSeconds = Convert.ToInt32(durationService.Text) * 60,
-                                        Description = descriptionService.Text,
-                                        Discount = Convert.ToDouble(discountService.Text) / 100,
-                                        MainImagePath = pathPhoto
-                                    };
+                                        string pathPhoto = "\\Resources\\" + Path.GetFileName(Convert.ToString(imageService.Source));
+                                        MessageBox.Show(pathPhoto);
+                                        if (pathPhoto == "pack://application:,,,/Resources/defaultImage.png")
+                                        {
+                                            pathPhoto = null;
+                                        }
+                                        service = new Service()
+                                        {
+                                            Title = nameService.Text,
+                                            Cost = Convert.ToInt32(priceService.Text),
+                                            DurationInSeconds = Convert.ToInt32(durationService.Text) * 60,
+                                            Description = descriptionService.Text,
+                                            Discount = Convert.ToDouble(discountService.Text) / 100,
+                                            MainImagePath = pathPhoto
+                                        };
 
-                                    DataBaseConnection.schoolEntities.Service.Add(service);
-                                    DataBaseConnection.schoolEntities.SaveChanges();
-                                    MessageBox.Show("Успешно добавлено!");
-                                    this.Close();
+                                        DataBaseConnection.schoolEntities.Service.Add(service);
+                                        DataBaseConnection.schoolEntities.SaveChanges();
+                                        MessageBox.Show("Успешно добавлено!");
+                                        this.Close();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Услуга с таким наименованием уже существует!");
+                                    }
+                                    
                                 }
                                 else
                                 {
@@ -119,7 +140,7 @@ namespace ForeignLanguageSchool
                 path = path.Replace("bin\\Debug", "");
                 path = path + "Resources\\"+nameCurrentImage; // итоговый путь, по которому перемещать изображение
                 File.Copy(nameImage, path, true); // копирование изображения из выбранного места в каталог проекта с возможностью замены уже существующей картинки
-                imageService.Source = new BitmapImage(new Uri(path));
+                imageService.Source = new BitmapImage(new Uri(path)); // установка изображения
             }
         }
     }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Xaml;
+using System.Windows.Media.Imaging;
 
 namespace ForeignLanguageSchool
 {
@@ -191,6 +192,28 @@ namespace ForeignLanguageSchool
             discountFiltrating.SelectedIndex = 0;
             nameService.Text = "";
             descriptionService.Text = "";
+        }
+
+        private void imageService_Loaded(object sender, RoutedEventArgs e) // Загружаем изображения из папки Resources в проекте
+        {
+            Image image = (Image)sender;
+            int index = Convert.ToInt32(image.Uid);
+
+            Service serviceItem = DataBaseConnection.schoolEntities.Service.FirstOrDefault(x => x.ID == index);
+
+            string path = Directory.GetCurrentDirectory(); // Берем путь проекта
+
+            path = path.Replace("bin\\Debug", $"{serviceItem.MainImagePath}"); //Меняем его на путь к Resources
+            
+            try 
+            {
+                image.Source = new BitmapImage(new Uri(path)); // Устанавливаем картинку
+            }
+            catch
+            {
+                image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/defaultImage.png")); // Если картинка не найдена, то устанавливаем заглушку
+            }
+            
         }
     }
 }

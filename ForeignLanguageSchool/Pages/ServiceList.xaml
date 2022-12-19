@@ -71,7 +71,7 @@
                     <Border BorderBrush="#04a0ff" BorderThickness="1" Background="{Binding GetBackgroundColorDiscountService}">
                         <Grid Height="150">
                             <DockPanel>
-                                <Image DockPanel.Dock="Left" Name="imageService" Source="{Binding MainImagePath, FallbackValue={StaticResource defaultImage}, TargetNullValue={StaticResource defaultImage}}" Width="200"></Image>
+                                <Image Uid="{Binding ID}" DockPanel.Dock="Left" Name="imageService" Source="{Binding FallbackValue={StaticResource defaultImage}, TargetNullValue={StaticResource defaultImage}}" Width="200" Loaded="imageService_Loaded"></Image>
                                 <StackPanel DockPanel.Dock="Top">
                                     <TextBlock Name="nameService" Text="{Binding Title}"></TextBlock>
 
