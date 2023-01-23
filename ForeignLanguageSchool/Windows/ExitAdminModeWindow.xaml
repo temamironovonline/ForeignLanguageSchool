@@ -8,10 +8,10 @@
         Title="Выход из режима администратора" Height="200" Width="500">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Вы уверены, что хотите выйти из режима администратора?"></TextBlock>
+            <TextBlock Text="Вы уверены, что хотите выйти из режима администратора?" Style="{StaticResource text}"></TextBlock>
             <WrapPanel HorizontalAlignment="Center">
-                <Button Name="yesButton" Content="Подтвердить" Click="yesButton_Click"></Button>
-                <Button Name="noButton" Content="Отменить" Click="noButton_Click"></Button>
+                <Button Name="yesButton" Width="100" Content="Подтвердить" Click="yesButton_Click" Style="{StaticResource button}"></Button>
+                <Button Name="noButton" Width="100" Content="Отменить" Click="noButton_Click" Style="{StaticResource button}"></Button>
             </WrapPanel>
         </StackPanel>
     </Grid>

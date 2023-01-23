@@ -11,25 +11,25 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Name="imageService" Source="\Resources\defaultImage.png" Width="200" Height="200"></Image>
-            <Button Name="addImage" Content="Добавить изображение" Click="addImage_Click"></Button>
+            <Button Name="addImage" Content="Добавить изображение" Click="addImage_Click" Style="{StaticResource button}"></Button>
             <StackPanel>
-                
-                <TextBlock Text="Наименование услуги"></TextBlock>
+
+                <TextBlock Text="Наименование услуги" Style="{StaticResource text}"></TextBlock>
                 <TextBox Name="nameService" Width="120"></TextBox>
 
-                <TextBlock Text="Стоимость услуги"></TextBlock>
+                <TextBlock Text="Стоимость услуги" Style="{StaticResource text}"></TextBlock>
                 <TextBox Name="priceService" Width="120" PreviewTextInput="priceService_PreviewTextInput"></TextBox>
 
-                <TextBlock Text="Длительность услуги (минуты)"></TextBlock>
+                <TextBlock Text="Длительность услуги (минуты)" Style="{StaticResource text}"></TextBlock>
                 <TextBox Name="durationService" Width="120" PreviewTextInput="durationService_PreviewTextInput"></TextBox>
 
-                <TextBlock Text="Описание услуги"></TextBlock>
+                <TextBlock Text="Описание услуги" Style="{StaticResource text}"></TextBlock>
                 <TextBox Name="descriptionService" Width="120" Height="100" TextWrapping="Wrap"></TextBox>
 
-                <TextBlock Text="Скидка на услугу"></TextBlock>
+                <TextBlock Text="Скидка на услугу" Style="{StaticResource text}"></TextBlock>
                 <TextBox Name="discountService" Width="120" PreviewTextInput="discountService_PreviewTextInput"></TextBox>
 
-                <Button Name="addUpdateButton" Width="120" Content="Добавить" Click="addUpdateButton_Click"></Button>
+                <Button Name="addUpdateButton" Width="120" Content="Добавить" Click="addUpdateButton_Click" Style="{StaticResource button}"></Button>
             </StackPanel>
             
          

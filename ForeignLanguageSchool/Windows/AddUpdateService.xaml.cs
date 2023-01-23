@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -20,15 +21,37 @@ namespace ForeignLanguageSchool
         public AddUpdateService()
         {
             InitializeComponent();
-            services = DataBaseConnection.schoolEntities.Service.ToList();
         }
 
         Service service;
-        List<Service> services;
+        List<Service> services = DataBaseConnection.schoolEntities.Service.ToList();
 
         public AddUpdateService(Service service)
         {
+            InitializeComponent();
+            this.service = service;
 
+            string path = Directory.GetCurrentDirectory(); // Берем путь проекта
+            path = path.Replace("bin\\Debug", $"{service.MainImagePath}"); //Меняем его на путь к Resources
+
+            try
+            {
+                imageService.Source = new BitmapImage(new Uri(path)); // Устанавливаем картинку
+            }
+            catch
+            {
+                imageService.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/defaultImage.png")); // Если картинка не найдена, то устанавливаем заглушку
+            }
+
+            nameService.Text = service.Title;
+            priceService.Text = Convert.ToString(service.Cost);
+            durationService.Text = Convert.ToString(service.DurationInSeconds / 60);
+            discountService.Text = Convert.ToString(service.Discount*100);
+            descriptionService.Text = Convert.ToString(service.Description);
+
+            this.Title = "Изменение услуги";
+            addImage.Content = "Изменить изображение";
+            addUpdateButton.Content = "Изменить";
         }
 
         private void addUpdateButton_Click(object sender, RoutedEventArgs e)
@@ -47,12 +70,13 @@ namespace ForeignLanguageSchool
                                 {
                                     bool checkSame = false;
                                     nameService.Text = nameService.Text.Trim();
-                                    foreach(Service serviceSearch in services)
+                                    foreach(Service serviceSearch in services) // Проверка на уже существующую услугу с таким названием
                                     {
-                                        if (serviceSearch.Title == nameService.Text)
+                                        if (serviceSearch.Title == nameService.Text && serviceSearch.ID != service.ID)
                                         {
                                             checkSame = true;
                                         }
+                                        
                                     }
                                     if (!checkSame)
                                     {
@@ -62,19 +86,32 @@ namespace ForeignLanguageSchool
                                         {
                                             pathPhoto = null;
                                         }
-                                        service = new Service()
+                                        
+                                        if (service != null)
                                         {
-                                            Title = nameService.Text,
-                                            Cost = Convert.ToInt32(priceService.Text),
-                                            DurationInSeconds = Convert.ToInt32(durationService.Text) * 60,
-                                            Description = descriptionService.Text,
-                                            Discount = Convert.ToDouble(discountService.Text) / 100,
-                                            MainImagePath = pathPhoto
-                                        };
+                                            service.Title = nameService.Text;
+                                            service.Cost = Convert.ToInt32(priceService.Text);
+                                            service.DurationInSeconds = Convert.ToInt32(durationService.Text) * 60;
+                                            service.Description = descriptionService.Text;
+                                            service.Discount = Convert.ToDouble(discountService.Text) / 100;
+                                            service.MainImagePath = pathPhoto;
+                                        }
+                                        else
+                                        {
+                                            service = new Service()
+                                            {
+                                                Title = nameService.Text,
+                                                Cost = Convert.ToInt32(priceService.Text),
+                                                DurationInSeconds = Convert.ToInt32(durationService.Text) * 60,
+                                                Description = descriptionService.Text,
+                                                Discount = Convert.ToDouble(discountService.Text) / 100,
+                                                MainImagePath = pathPhoto
+                                            };
+                                            DataBaseConnection.schoolEntities.Service.Add(service);
+                                        }
 
-                                        DataBaseConnection.schoolEntities.Service.Add(service);
                                         DataBaseConnection.schoolEntities.SaveChanges();
-                                        MessageBox.Show("Успешно добавлено!");
+                                        MessageBox.Show("Операция выполнена успешно");
                                         this.Close();
                                     }
                                     else

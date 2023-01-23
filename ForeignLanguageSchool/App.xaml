@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:ForeignLanguageSchool"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        
+        <Style x:Key="text" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+        </Style>
+
+        <Style x:Key="button" TargetType="Button">
+            <Setter Property="Background" Value="#04a0ff"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Height" Value="20"></Setter>
+        </Style>
+        
     </Application.Resources>
 </Application>

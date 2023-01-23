@@ -1,0 +1,37 @@
+﻿<Window x:Class="ForeignLanguageSchool.RecordListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ForeignLanguageSchool"
+        mc:Ignorable="d"
+        Title="Записи клиентов" Height="450" Width="800">
+    <Grid>
+        <ListView Name="recordList" Grid.Row="1" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#04a0ff" BorderThickness="1" Background="{Binding GetBackgroundColorDiscountService}">
+                        <Grid Height="150">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Service.Title}" Style="{StaticResource text}"></TextBlock>
+                                <TextBlock Style="{StaticResource text}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="Клиент: {0} {1} {2}">
+                                            <Binding Path="Client.LastName"></Binding>
+                                            <Binding Path="Client.FirstName"></Binding>
+                                            <Binding Path="Client.Patronymic"></Binding>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock Text="{Binding Client.Email, StringFormat=Email: {0}}" Style="{StaticResource text}"></TextBlock>
+                                <TextBlock Text="{Binding Client.Phone, StringFormat=Телефон: {0}}" Style="{StaticResource text}"></TextBlock>
+                                <TextBlock Text="{Binding StartTime, StringFormat=Время начала: {0:dd.MM.yy HH.mm.ss}}" Style="{StaticResource text}"></TextBlock>
+                                <TextBlock Uid="{Binding ID}" Name="remainingTime" Loaded="remainingTime_Loaded" Style="{StaticResource text}"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>

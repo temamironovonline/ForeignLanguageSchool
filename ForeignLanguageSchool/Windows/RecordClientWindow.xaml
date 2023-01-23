@@ -1,0 +1,28 @@
+﻿<Window x:Class="ForeignLanguageSchool.RecordClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ForeignLanguageSchool"
+        mc:Ignorable="d"
+        Title="Запись клиента на услугу" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Name="nameService" Style="{StaticResource text}"></TextBlock>
+
+            <TextBlock Text="Клиенты" Style="{StaticResource text}"></TextBlock>
+            <ComboBox Name="clients"></ComboBox>
+
+            <TextBlock Text="Дата записи" Style="{StaticResource text}"></TextBlock>
+            <DatePicker Name="dateRecord" SelectedDateChanged="dateRecord_SelectedDateChanged"></DatePicker>
+
+            <TextBlock Text="Время записи" Style="{StaticResource text}"></TextBlock>
+            <TextBox Name="timeRecord" TextChanged="timeRecord_TextChanged"></TextBox>
+
+            <TextBlock Name="endtimeService" ></TextBlock>
+
+            <Button Name="recordClient" Content="Записать" Click="recordClient_Click" Width="100" Style="{StaticResource button}"></Button>
+        </StackPanel>
+        
+    </Grid>
+</Window>

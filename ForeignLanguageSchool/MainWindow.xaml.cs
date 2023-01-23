@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace ForeignLanguageSchool
 {
@@ -13,6 +14,7 @@ namespace ForeignLanguageSchool
             InitializeComponent();
             DataBaseConnection.schoolEntities = new SchoolEntities();
             FrameClass.forFrameWindow = frameWindow;
+
             FrameClass.forFrameWindow.Navigate(new ServiceList());
         }
 
@@ -32,10 +34,11 @@ namespace ForeignLanguageSchool
                 if (adminWindow.Password == "0000")
                 {
                     adminMode = true;
-                    FrameClass.forFrameWindow.Refresh();
+                    FrameClass.forFrameWindow.Navigate(new ServiceList());
                     adminModeButton.Visibility = Visibility.Collapsed;
                     exitAdminModeButton.Visibility = Visibility.Visible;
                     addServiceButton.Visibility = Visibility.Visible;
+                    recordList.Visibility = Visibility.Visible;
                 }
                 else MessageBox.Show("Неверный пароль!");
             }
@@ -53,30 +56,27 @@ namespace ForeignLanguageSchool
                 if (exitAdminMode.GetExitResult)
                 {
                     adminMode = false;
-                    FrameClass.forFrameWindow.Refresh();
+                    FrameClass.forFrameWindow.Navigate(new ServiceList());
                     exitAdminModeButton.Visibility = Visibility.Collapsed;
-                    adminModeButton.Visibility = Visibility.Visible;
                     addServiceButton.Visibility = Visibility.Collapsed;
+                    recordList.Visibility = Visibility.Collapsed;
+                    adminModeButton.Visibility = Visibility.Visible;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Ошибка при выходе из режима администратора!");
             }
         }
 
         private void addServiceButton_Click(object sender, RoutedEventArgs e)
         {
-            AddUpdateService addUpdateWindow = new AddUpdateService();
+            AddUpdateService addServiceWindow = new AddUpdateService();
+            addServiceWindow.ShowDialog();
+            FrameClass.forFrameWindow.Navigate(new ServiceList());
+            
+        }
 
-            if (addUpdateWindow.ShowDialog() == true)
-            {
-                FrameClass.forFrameWindow.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("При открытии окна с добавлением услуги произошла ошибка!");
-            }
+        private void recordList_Click(object sender, RoutedEventArgs e)
+        {
+            RecordListWindow recordListWindow = new RecordListWindow();
+            recordListWindow.Show();
         }
     }
 }

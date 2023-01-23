@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -24,18 +25,7 @@ namespace ForeignLanguageSchool
             serviceList.ItemsSource = DataBaseConnection.schoolEntities.Service.ToList();
         }
 
-        private void updateButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        private int indexForAllLoadedMethods = 0;
+        private int indexForAllLoadedMethods = 0; // Переменная для всех событий при загрузке
 
         private void oldPrice_Loaded(object sender, RoutedEventArgs e) // Событие для вывода старой цены, если есть скидка
         {
@@ -111,6 +101,73 @@ namespace ForeignLanguageSchool
             {
                 deleteButtonSender.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void recordClient_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button recordButtonSender = (Button)sender;
+            indexForAllLoadedMethods = Convert.ToInt32(recordButtonSender.Uid);
+
+            if (MainWindow.GetAdminModeStatus)
+            {
+                recordButtonSender.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                recordButtonSender.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void imageService_Loaded(object sender, RoutedEventArgs e) // Загружаем изображения из папки Resources в проекте
+        {
+            Image image = (Image)sender;
+            int index = Convert.ToInt32(image.Uid);
+
+            Service serviceItem = DataBaseConnection.schoolEntities.Service.FirstOrDefault(x => x.ID == index);
+            string path = Directory.GetCurrentDirectory(); // Берем путь проекта
+            path = path.Replace("bin\\Debug", $"{serviceItem.MainImagePath}"); //Меняем его на путь к Resources
+
+            try
+            {
+                image.Source = new BitmapImage(new Uri(path)); // Устанавливаем картинку
+            }
+            catch
+            {
+                image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/defaultImage.png")); // Если картинка не найдена, то устанавливаем заглушку
+            }
+
+        }
+
+        private int indexForButtonsList = 0; // Переменная для кнопок, которые находится в ListView
+
+        private void updateButton_Click(object sender, RoutedEventArgs e) // Событие для изменение конкретной записи
+        {
+            Button senderButton = (Button)sender;
+            indexForButtonsList = Convert.ToInt32(senderButton.Uid);
+
+            Service serviceItem = DataBaseConnection.schoolEntities.Service.FirstOrDefault(x => x.ID == indexForButtonsList);
+            AddUpdateService updateServiceWindow = new AddUpdateService(serviceItem);
+            updateServiceWindow.ShowDialog();
+
+            FrameClass.forFrameWindow.Navigate(new ServiceList());
+        }
+
+        private void recordClient_Click(object sender, RoutedEventArgs e)
+        {
+            Button recordButton = (Button)sender;
+            indexForButtonsList = Convert.ToInt32(recordButton.Uid);
+
+            Service service = DataBaseConnection.schoolEntities.Service.FirstOrDefault(x => x.ID == indexForButtonsList);
+
+            RecordClientWindow recordClientWindows = new RecordClientWindow(service);
+            
+            recordClientWindows.Show();
+
+        }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e) // Событие на удаление конкретной записи
+        {
+
         }
 
         private void DataFiltrationAndSorting()
@@ -194,26 +251,6 @@ namespace ForeignLanguageSchool
             descriptionService.Text = "";
         }
 
-        private void imageService_Loaded(object sender, RoutedEventArgs e) // Загружаем изображения из папки Resources в проекте
-        {
-            Image image = (Image)sender;
-            int index = Convert.ToInt32(image.Uid);
-
-            Service serviceItem = DataBaseConnection.schoolEntities.Service.FirstOrDefault(x => x.ID == index);
-
-            string path = Directory.GetCurrentDirectory(); // Берем путь проекта
-
-            path = path.Replace("bin\\Debug", $"{serviceItem.MainImagePath}"); //Меняем его на путь к Resources
-            
-            try 
-            {
-                image.Source = new BitmapImage(new Uri(path)); // Устанавливаем картинку
-            }
-            catch
-            {
-                image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/defaultImage.png")); // Если картинка не найдена, то устанавливаем заглушку
-            }
-            
-        }
+       
     }
 }

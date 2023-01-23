@@ -22,8 +22,8 @@
         <WrapPanel VerticalAlignment="Center">
             <StackPanel Margin="0,0,5,0">
                 
-                <TextBlock Text="По цене:" Margin="0,0,0,10"></TextBlock>
-                <TextBlock Text="По размеру скидки:"></TextBlock>
+                <TextBlock Text="По цене:" Margin="0,0,0,10" Style="{StaticResource text}"></TextBlock>
+                <TextBlock Text="По размеру скидки:" Style="{StaticResource text}"></TextBlock>
             
             </StackPanel>
 
@@ -47,9 +47,9 @@
             </StackPanel>
 
             <StackPanel>
-                
-                <TextBlock Text="Название услуги: " Margin="0,0,0,10"></TextBlock>
-                <TextBlock Text="Описание услуги: "></TextBlock>
+
+                <TextBlock Text="Название услуги: " Margin="0,0,0,10" Style="{StaticResource text}"></TextBlock>
+                <TextBlock Text="Описание услуги: " Style="{StaticResource text}"></TextBlock>
             
             </StackPanel>
 
@@ -60,7 +60,7 @@
                 
             </StackPanel>
 
-            <Button Name="clearButton" Content="Очистить" Height="20" Width="100" Click="clearButton_Click"></Button>
+            <Button Name="clearButton" Content="Очистить" Width="100" Click="clearButton_Click" Style="{StaticResource button}"></Button>
             
         </WrapPanel>
         
@@ -71,21 +71,22 @@
                     <Border BorderBrush="#04a0ff" BorderThickness="1" Background="{Binding GetBackgroundColorDiscountService}">
                         <Grid Height="150">
                             <DockPanel>
-                                <Image Uid="{Binding ID}" DockPanel.Dock="Left" Name="imageService" Source="{Binding FallbackValue={StaticResource defaultImage}, TargetNullValue={StaticResource defaultImage}}" Width="200" Loaded="imageService_Loaded"></Image>
+                                <Image Uid="{Binding ID}" DockPanel.Dock="Left" Name="imageService" Source="{Binding FallbackValue={StaticResource defaultImage}, TargetNullValue={StaticResource defaultImage}}" Width="200" Loaded="imageService_Loaded" Margin="5"></Image>
                                 <StackPanel DockPanel.Dock="Top">
-                                    <TextBlock Name="nameService" Text="{Binding Title}"></TextBlock>
+                                    <TextBlock Name="nameService" Text="{Binding Title}" Style="{StaticResource text}"></TextBlock>
 
                                     <WrapPanel>
-                                        <TextBlock Uid="{Binding ID}" Name="oldPrice" Text="{Binding Cost}" Margin="0,0,5,0" TextDecorations="Strikethrough" Visibility="Collapsed" Loaded="oldPrice_Loaded"></TextBlock>
-                                        <TextBlock Uid="{Binding ID}" Name="informationService" Text="" Loaded="informationService_Loaded"></TextBlock>
+                                        <TextBlock Uid="{Binding ID}" Name="oldPrice" Style="{StaticResource text}" Text="{Binding Cost}" Margin="0,0,5,0" TextDecorations="Strikethrough" Visibility="Collapsed" Loaded="oldPrice_Loaded"></TextBlock>
+                                        <TextBlock Uid="{Binding ID}" Name="informationService" Style="{StaticResource text}" Text="" Loaded="informationService_Loaded"></TextBlock>
                                     </WrapPanel>
 
-                                    <TextBlock Uid="{Binding ID}" Name="discount" Text="" Visibility="Collapsed" Loaded="discount_Loaded"></TextBlock>
+                                    <TextBlock Uid="{Binding ID}" Name="discount" Text="" Style="{StaticResource text}" Visibility="Collapsed" Loaded="discount_Loaded"></TextBlock>
                                 </StackPanel>
 
                                 <WrapPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                                    <Button Uid="{Binding ID}" Name="updateButton" Content="Редактировать" Click="updateButton_Click"  Width="150" Height="20" Loaded="updateButton_Loaded"></Button>
-                                    <Button Uid="{Binding ID}" Name="deleteButton" Content="Удалить" Click="deleteButton_Click" Width="150" Height="20" Loaded="deleteButton_Loaded"></Button>
+                                    <Button Uid="{Binding ID}" Name="updateButton" Content="Редактировать" Width="150" Loaded="updateButton_Loaded" Click="updateButton_Click" Style="{StaticResource button}"></Button>
+                                    <Button Uid="{Binding ID}" Name="deleteButton" Content="Удалить" Width="150" Loaded="deleteButton_Loaded"  Click="deleteButton_Click" Style="{StaticResource button}"></Button>
+                                    <Button Uid="{Binding ID}" Name="recordClient" Content="Записать клиента" Width="150" Loaded="recordClient_Loaded" Click="recordClient_Click" Style="{StaticResource button}"></Button>
                                 </WrapPanel>
                             </DockPanel>
                         </Grid>
