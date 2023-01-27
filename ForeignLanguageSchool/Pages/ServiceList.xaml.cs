@@ -167,7 +167,26 @@ namespace ForeignLanguageSchool
 
         private void deleteButton_Click(object sender, RoutedEventArgs e) // Событие на удаление конкретной записи
         {
+            Button deleteButton = (Button)sender;
+            indexForButtonsList = Convert.ToInt32(deleteButton.Uid);
 
+            if (DataBaseConnection.schoolEntities.ClientService.FirstOrDefault(x => x.ServiceID == indexForButtonsList) == null)
+            {
+                ConfirmDeleteService confirmDelete = new ConfirmDeleteService();
+                confirmDelete.ShowDialog();
+                if (confirmDelete.GetExitResult)
+                {
+                    Service service = DataBaseConnection.schoolEntities.Service.FirstOrDefault(x => x.ID == indexForButtonsList);
+                    DataBaseConnection.schoolEntities.Service.Remove(service);
+                    DataBaseConnection.schoolEntities.SaveChanges();
+                    MessageBox.Show("Услуга была успешно удалена!");
+                    FrameClass.forFrameWindow.Navigate(new ServiceList());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Невозможно удалить услугу, так как на нее существуют записи!");
+            }
         }
 
         private void DataFiltrationAndSorting()

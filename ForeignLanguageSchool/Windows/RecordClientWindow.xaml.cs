@@ -29,7 +29,7 @@ namespace ForeignLanguageSchool
             }
         }
 
-        private Regex regexTime = new Regex("(^[0-1][0-9]:[0-5][0-9]$)|(^[2][0-3]:[0-5][0-9]$)"); // Регулярное выражение на проверку вводимого времени
+        private Regex regexTime = new Regex("(^[0-9]:[0-5][0-9]$)|(^[1][0-9]:[0-5][0-9]$)|(^[2][0-3]:[0-5][0-9]$)"); // Регулярное выражение на проверку вводимого времени
 
         private void recordClient_Click(object sender, RoutedEventArgs e)
         {
@@ -104,7 +104,6 @@ namespace ForeignLanguageSchool
                     }   
                 }
             }
-            
         }
     }
 }

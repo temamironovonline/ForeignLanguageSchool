@@ -2,31 +2,28 @@
 
 namespace ForeignLanguageSchool
 {
-    /// <summary>
-    /// Логика взаимодействия для ExitAdminModeWindow.xaml
-    /// </summary>
     public partial class ExitAdminModeWindow : Window
     {
-        private bool exitResult = false;
+        private bool _exitResult = false; // Переменная для проверки какую кнопку нажал пользователь
         public ExitAdminModeWindow()
         {
             InitializeComponent();
         }
 
-        private void yesButton_Click(object sender, RoutedEventArgs e)
+        private void yesButton_Click(object sender, RoutedEventArgs e) // Событие, если пользователь нажал кнопку "Да"
         {
-            exitResult = true;
+            _exitResult = true;
             this.DialogResult = true;
         }
 
-        private void noButton_Click(object sender, RoutedEventArgs e)
+        private void noButton_Click(object sender, RoutedEventArgs e) // Событие, если пользователь нажал кнопку "Нет"
         {
             this.DialogResult = true;
         }
 
-        public bool GetExitResult
+        public bool GetExitResult // Свойство, возращающее значение результата выбора пользователя
         {
-            get { return exitResult; }
+            get { return _exitResult; }
         }
     }
 }

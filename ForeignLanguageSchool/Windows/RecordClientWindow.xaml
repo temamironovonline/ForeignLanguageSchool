@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForeignLanguageSchool"
         mc:Ignorable="d"
+        Icon="../Resources/school_logo.ico"
         Title="Запись клиента на услугу" Height="450" Width="800">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -12,27 +11,25 @@ using Path = System.IO.Path;
 
 namespace ForeignLanguageSchool
 {
-    /// <summary>
-    /// Логика взаимодействия для AddUpdateService.xaml
-    /// </summary>
     public partial class AddUpdateService : Window
     {
-        
-        public AddUpdateService()
+        public AddUpdateService() // Конструктор, который срабатывает при добавлении услуги
         {
             InitializeComponent();
         }
 
-        Service service;
-        List<Service> services = DataBaseConnection.schoolEntities.Service.ToList();
+        private Service _service; // Объект услуг, который используется при изменении услуги
 
-        public AddUpdateService(Service service)
+        private List<Service> _services = DataBaseConnection.schoolEntities.Service.ToList(); // Список услуг, который используется при изменении услуги
+
+        public AddUpdateService(Service service) // Конструктор, который срабатывает при изменении услуги
         {
             InitializeComponent();
-            this.service = service;
 
-            string path = Directory.GetCurrentDirectory(); // Берем путь проекта
-            path = path.Replace("bin\\Debug", $"{service.MainImagePath}"); //Меняем его на путь к Resources
+            _service = service;
+
+            string path = Directory.GetCurrentDirectory(); // Путь проекта
+            path = path.Replace("bin\\Debug", $"{service.MainImagePath}"); // Меняем конечные папки проекта на путь к Resources
 
             try
             {
@@ -43,6 +40,7 @@ namespace ForeignLanguageSchool
                 imageService.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/defaultImage.png")); // Если картинка не найдена, то устанавливаем заглушку
             }
 
+            // Устанавливаем значения полям на форме изменения услуги из выбранной услуги
             nameService.Text = service.Title;
             priceService.Text = Convert.ToString(service.Cost);
             durationService.Text = Convert.ToString(service.DurationInSeconds / 60);
@@ -56,49 +54,50 @@ namespace ForeignLanguageSchool
 
         private void addUpdateButton_Click(object sender, RoutedEventArgs e)
         {
+            // Проверка на пустые поля
             if (nameService.Text != "")
             {
                 if (priceService.Text != "")
                 {
                     if (durationService.Text != "")
                     {
-                        if (Convert.ToInt32(durationService.Text) <= 240 && Convert.ToInt32(durationService.Text) > 0)
+                        if (Convert.ToInt32(durationService.Text) <= 240 && Convert.ToInt32(durationService.Text) > 0) // Время выполнения услуги не должно превышать 240 минут и быть меньше 0
                         {
                             if (discountService.Text != "")
                             {
-                                if (Convert.ToInt32(discountService.Text) <= 100 && Convert.ToInt32(discountService.Text) >= 0)
+                                if (Convert.ToInt32(discountService.Text) <= 100 && Convert.ToInt32(discountService.Text) >= 0) // Скидка не может быть больше 100 и меньше 0 %
                                 {
                                     bool checkSame = false;
                                     nameService.Text = nameService.Text.Trim();
-                                    foreach(Service serviceSearch in services) // Проверка на уже существующую услугу с таким названием
+                                    foreach(Service serviceSearch in _services) // Проверка на уже существующую услугу с таким названием
                                     {
-                                        if (serviceSearch.Title == nameService.Text && serviceSearch.ID != service.ID)
+                                        if (serviceSearch.Title == nameService.Text && serviceSearch.ID != _service.ID) // Если имя совпадает, но ID разные (т.е. исключаем возможность того, что при изменении услуги не изменится ее имя, но изменение не сработает, так как такое же имя уже есть в бд)
                                         {
                                             checkSame = true;
                                         }
                                         
                                     }
-                                    if (!checkSame)
+                                    if (!checkSame) // Если услуга с таким же наименованием не существует
                                     {
-                                        string pathPhoto = "\\Resources\\" + Path.GetFileName(Convert.ToString(imageService.Source));
-                                        MessageBox.Show(pathPhoto);
-                                        if (pathPhoto == "pack://application:,,,/Resources/defaultImage.png")
+                                        string pathPhoto = "\\Resources\\" + Path.GetFileName(Convert.ToString(imageService.Source)); // Записываем путь к изображению
+
+                                        if (pathPhoto == "pack://application:,,,/Resources/defaultImage.png") // Если изображение не было установлено (т.е. стоит заглушка)
                                         {
                                             pathPhoto = null;
                                         }
                                         
-                                        if (service != null)
+                                        if (_service != null) // При изменении услуги
                                         {
-                                            service.Title = nameService.Text;
-                                            service.Cost = Convert.ToInt32(priceService.Text);
-                                            service.DurationInSeconds = Convert.ToInt32(durationService.Text) * 60;
-                                            service.Description = descriptionService.Text;
-                                            service.Discount = Convert.ToDouble(discountService.Text) / 100;
-                                            service.MainImagePath = pathPhoto;
+                                            _service.Title = nameService.Text;
+                                            _service.Cost = Convert.ToInt32(priceService.Text);
+                                            _service.DurationInSeconds = Convert.ToInt32(durationService.Text) * 60;
+                                            _service.Description = descriptionService.Text;
+                                            _service.Discount = Convert.ToDouble(discountService.Text) / 100;
+                                            _service.MainImagePath = pathPhoto;
                                         }
-                                        else
+                                        else // При добавлении услуги
                                         {
-                                            service = new Service()
+                                            _service = new Service()
                                             {
                                                 Title = nameService.Text,
                                                 Cost = Convert.ToInt32(priceService.Text),
@@ -107,7 +106,7 @@ namespace ForeignLanguageSchool
                                                 Discount = Convert.ToDouble(discountService.Text) / 100,
                                                 MainImagePath = pathPhoto
                                             };
-                                            DataBaseConnection.schoolEntities.Service.Add(service);
+                                            DataBaseConnection.schoolEntities.Service.Add(_service);
                                         }
 
                                         DataBaseConnection.schoolEntities.SaveChanges();
@@ -147,19 +146,19 @@ namespace ForeignLanguageSchool
             }
         }
 
-        private void priceService_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void priceService_PreviewTextInput(object sender, TextCompositionEventArgs e) // Событие на возможность ввода только цифр в поле цены
         {
             Regex regex = new Regex($"[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void durationService_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void durationService_PreviewTextInput(object sender, TextCompositionEventArgs e) // Событие на возможность ввода только цифр в поле времени
         {
             Regex regex = new Regex($"[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void discountService_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void discountService_PreviewTextInput(object sender, TextCompositionEventArgs e) // Событие на возможность ввода только цифр в поле скидки
         {
             Regex regex = new Regex($"[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);

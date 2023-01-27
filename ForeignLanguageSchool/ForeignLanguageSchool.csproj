@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windows\ConfirmDeleteService.xaml.cs">
+      <DependentUpon>ConfirmDeleteService.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\RecordListWindow.xaml.cs">
       <DependentUpon>RecordListWindow.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
     <Compile Include="Tag.cs">
       <DependentUpon>SchoolModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Windows\ConfirmDeleteService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\RecordListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

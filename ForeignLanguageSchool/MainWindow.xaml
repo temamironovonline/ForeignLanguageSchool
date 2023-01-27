@@ -12,7 +12,8 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-
+        
+        <!--Навигационное меню-->
         <WrapPanel VerticalAlignment="Center">
             <Image Source="\Resources\school_logo.png" Height="30" Margin="5"></Image>
             <TextBlock Text="ЛЕАРН" VerticalAlignment="Center" Width="50" HorizontalAlignment="Left" Style="{StaticResource text}"></TextBlock>
@@ -23,9 +24,12 @@
             <Button Name="recordList" Width="200" Content="Список записей" Visibility="Collapsed" Click="recordList_Click" Style="{StaticResource button}"></Button>
             <Button Name="exitAdminModeButton" Width="210" Content="Выйти из режима администратора" Visibility="Collapsed" Click="exitAdminModeButton_Click" Style="{StaticResource button}"></Button>
         </WrapPanel>
+        <!--/Навигационное меню-->
+        
         
         <Frame Name="frameWindow" Grid.Row="1" NavigationUIVisibility="Hidden">
             
         </Frame>
+        
     </Grid>
 </Window>

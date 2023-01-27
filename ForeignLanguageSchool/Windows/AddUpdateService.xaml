@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForeignLanguageSchool"
         mc:Ignorable="d"
+        Icon="../Resources/school_logo.ico"
         Title="Добавление услуги" Height="550" Width="600">
 
 
